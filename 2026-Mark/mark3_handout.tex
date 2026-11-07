@@ -2,7 +2,7 @@
 % Compile with pdfLaTeX:
 %   pdflatex mark3_handout.tex
 % To fill the NET column automatically:  python3 fill_net.py mark3_handout.tex
-\documentclass[10pt]{article}
+\documentclass[9pt]{article}
 
 \usepackage[letterpaper, margin=0.6in]{geometry}
 \usepackage[T1]{fontenc}
@@ -23,8 +23,22 @@
 
 \usepackage[style=authortitle-ibid, backend=bibtex]{biblatex}
 \addbibresource{references.bib}
+\renewcommand*{\bibfont}{\fontsize{7}{9.5}\selectfont}
+\defbibenvironment{bibliography}
+  {\list{}{%
+     \setlength{\leftmargin}{\bibhang}%
+     \setlength{\itemindent}{-\leftmargin}%
+     \setlength{\itemsep}{\bibitemsep}%
+     \setlength{\parsep}{\bibparsep}%
+     \setlength{\topsep}{0pt}%
+     \setlength{\partopsep}{0pt}}}
+  {\endlist}
+  {\item}
 
-\definecolor{versenum}{HTML}{8B2E2E}
+% small closing headings (prayer, Works Cited)
+\newcommand{\minorhead}[1]{\par\vspace{1.4ex}{\normalsize\scshape #1\par}\vspace{0.4ex}}
+
+\definecolor{versenum}{HTML}{00158c}
 \definecolor{placeholder}{gray}{0.55}
 \definecolor{rulegray}{gray}{0.75}
 
@@ -32,7 +46,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small\itshape Mark 3:7--35}
-\fancyhead[R]{\small\itshape Bible Study Handout}
+\fancyhead[R]{\small\itshape Bible Study Handout 2026-11-08}
 \fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 
@@ -40,6 +54,8 @@
 \titlespacing*{\section}{0pt}{1.4ex}{0.6ex}
 
 \renewcommand{\footnotesize}{\fontsize{9}{10}\selectfont}
+\renewcommand{\thefootnote}{\Alph{footnote}}  
+
 
 % ---- Parallel columns --------------------------------------------------
 
@@ -55,6 +71,8 @@
 \newcommand{\netslot}[1]{%
   \ifblank{#1}{\textcolor{placeholder}{\itshape [NET text]}}{#1}}
 
+
+\newcommand{\fnref}[1]{\textsuperscript{\ref{#1}}}
 % \bv{number}{KJV text}{NET text}
 % \switchcolumn[0]* re-syncs both columns, so each verse starts on the same line.
 \newcommand{\bv}[3]{%
@@ -65,8 +83,10 @@
 }
 
 % \section heading across both columns
+\usepackage{needspace}
 \newcommand{\pericope}[1]{%
   \end{paracol}
+  \needspace{5\baselineskip}%  keep the heading with a few lines of text
   \section*{#1}
   \begin{paracol}{2}
 }
@@ -78,44 +98,58 @@
 
 \begin{document}
 
-\begin{center}
-  {\LARGE\scshape Mark 3:7--35}\\[0.4ex]
-  {\large\itshape Crowds, the Twelve, and the True Family of Jesus}
-\end{center}
-\vspace{0.5ex}
+
+
+{\centering
+  {\Large\scshape Mark 3:7--35}\\[0.2ex]}
+\vspace{0.3ex}
+
+
+%\begin{center}
+ %{\LARGE\scshape Mark 3:7--35}\\[0.4ex]
+ % {\large\itshape Crowds, the Twelve, and the True Family of Jesus}
+%\end{center}
+%\vspace{0.5ex}
+
 
 \begin{paracol}{2}
 \sloppy
-\begin{center}\textbf{King James Version}\end{center}
+{\centering\textbf{King James Version}\par}
 \switchcolumn
-\begin{center}\textbf{New English Translation}\end{center}
+{\centering\textbf{New English Translation}\par}
+%\begin{paracol}{2}
+%\sloppy
+%\begin{center}\textbf{King James Version}\end{center}
+%\switchcolumn
+%\begin{center}\textbf{New English Translation}\end{center}
 
-\pericope{Crowds by the Sea (vv.~7--12)}
+\pericope{A Great Crowd Follows Jesus (vv.~7--12)}
 
 \bv{7}{But Jesus withdrew himself with his disciples to the sea: and a great multitude from Galilee followed him, and from Judaea,}{Then Jesus went away with his disciples to the sea, and a great multitude from Galilee followed him. And from Judea,}
 \bv{8}{And from Jerusalem, and from Idumaea, and from beyond Jordan; and they about Tyre and Sidon, a great multitude, when they had heard what great things he did, came unto him.}{Jerusalem, Idumea, beyond the Jordan River, and around Tyre and Sidon a great multitude came to him when they heard about the things he had done.}
 \bv{9}{And he spake to his disciples, that a small ship should wait on him because of the multitude, lest they should throng him.}{Because of the crowd, he told his disciples to have a small boat ready for him so the crowd would not press toward him.}
 \bv{10}{For he had healed many; insomuch that they pressed upon him for to touch him, as many as had plagues.}{For he had healed many, so that all who were afflicted with diseases pressed toward him in order to touch him.}
-\bv{11}{And unclean spirits, when they saw him, fell down before him, and cried, saying, Thou art the Son of God.}{And whenever the unclean spirits saw him, they fell down before him\footnote{\gk{προσπίπτω} (prospipto): vb.; Str 4363—1. LN 17.22 prostrate oneself before, fall down before in reverence or fear (Mk 3:11; 5:33; 7:25; Lk 5:8; 8:28, 47; Ac 16:29+);\parencite{Swanson-1997}} and cried out, “You are the Son of God.”}
+\bv{11}{And unclean spirits, when they saw him, fell down before him\fnref{fn:prostrate}, and cried, saying, Thou art the Son of God.}{And whenever the unclean spirits saw him, they fell down before him\footnote{\label{fn:prostrate}\gk{προσπίπτω} (prospipto): vb.; Str 4363—1. LN 17.22 prostrate oneself before, fall down before in reverence or fear (Mk 3:11; 5:33; 7:25; Lk 5:8; 8:28, 47; Ac 16:29+);\parencite{Swanson-1997}} and cried out, “You are the Son of God.”}
 \bv{12}{And he straitly charged them that they should not make him known.}{But he sternly ordered them not to make him known.}
 
-\pericope{The Appointing of the Twelve (vv.~13--19)}
+\pericope{The Twelve Apostles (vv.~13--21)}
 
 \bv{13}{And he goeth up into a mountain, and calleth unto him whom he would: and they came unto him.}{Now Jesus went up the mountain and called for those he wanted, and they came to him.}
-\bv{14}{And he ordained twelve, that they should be with him, and that he might send them forth to preach,}{He appointed 12 (whom he named apostles)\footnote{\textsc{tc} The phrase “whom he named apostles” is lacking in the majority of MSS (A C2 [D] L f1 33 𝔐 latt sy). Several primary Alexandrian and Caesarean witnesses (א B [C* W] Θ f13 28 pc co) include the phrase, so the external evidence is strongly in favor of this reading, especially since Alexandrian witnesses tend to witness to the shorter reading. It is possible that the Alexandrian witnesses have inserted these words to bring the text in line with Luke 6:13 (TCGNT 69), but against this is the internal evidence of Mark’s style: Mark tends toward gratuitous redundancy. Thus the inclusion of this phrase is supported by both internal and external evidence and should be regarded as more likely original than the omission.\parencite{NET_2005}}, so that they would be with him and he could send them to preach\footnote{\emph{Apostle - Jewish Usage.} Here the word is not widely used. It appears possibly twice in the writings of the historian Josephus, and not at all in Philo. Of the instances in Josephus one is important, where the word has the sense of sending “emissaries” or perhaps an “embassy.”
+\bv{14}{And he ordained twelve, that they should be with him, and that he might send\fnref{fn:send} them forth to preach,}{He appointed 12 (whom he named apostles)\footnote{\textsc{tc} The phrase “whom he named apostles” is lacking in the majority of MSS (A C2 [D] L f1 33 𝔐 latt sy). Several primary Alexandrian and Caesarean witnesses (א B [C* W] Θ f13 28 pc co) include the phrase, so the external evidence is strongly in favor of this reading, especially since Alexandrian witnesses tend to witness to the shorter reading. It is possible that the Alexandrian witnesses have inserted these words to bring the text in line with Luke 6:13 (TCGNT 69), but against this is the internal evidence of Mark’s style: Mark tends toward gratuitous redundancy. Thus the inclusion of this phrase is supported by both internal and external evidence and should be regarded as more likely original than the omission.\parencite{NET_2005}}, so that they would be with him and he could send\footnote{\label{fn:send}‘send’ here is ἀποστέλλω (apostellō), the verb from which ‘apostle’ derives. While the root means ‘to send,’ the term carries deeper significance: an apostle is not merely someone dispatched, but a special representative commissioned by Jesus to carry his message and represent his authority.
 
-\emph{The Septuagint (LXX)} uses the word of the prophet Ahijah in 1 Kings 14:6, translating a Hebrew participle meaning “one who is sent.” The Hebrew verb underlying this description had become a technical term in the OT for the sending of a messenger with a special task. Although accepting responsibility and agreeing to accomplish what is asked, the person of the messenger (whether divine or human) fades behind the importance of being so “formally” commissioned. Attention is to be focused on the initiator and his concerns. Perhaps the clearest example can be seen in the call of (Isaiah 6:8): “And I heard the voice of the Lord saying, ‘Whom shall I send \emph{(\gk{ἀποστείλω})}, and who will go for us?’ Then I said, ‘Here am I! Send \emph{(\gk{ἀπόστειλόν})} me.’ ” Thus when God’s prophet Ahijah (1 Ki 14:6) is described as “one who is sent,” the conviction is expressed that he is a divinely commissioned representative who must convey a message to the wife of King Jeroboam. By using the word “apostle” in this passage, the translators of the Septuagint gave it a meaning beyond the classical and papyri usages, replacing the secular meaning with a theological one.\parencite[131]{Elwell-Beitzel-1988}}}
+\emph{Apostle - Jewish Usage.} Here the word is not widely used. It appears possibly twice in the writings of the historian Josephus, and not at all in Philo. Of the instances in Josephus one is important, where the word has the sense of sending “emissaries” or perhaps an “embassy.”
+
+\emph{The Septuagint (LXX)} uses the word of the prophet Ahijah in 1 Kings 14:6, translating a Hebrew participle meaning “one who is sent.” The Hebrew verb underlying this description had become a technical term in the OT for the sending of a messenger with a special task. Although accepting responsibility and agreeing to accomplish what is asked, the person of the messenger (whether divine or human) fades behind the importance of being so “formally” commissioned. Attention is to be focused on the initiator and his concerns. Perhaps the clearest example can be seen in the call of (Isaiah 6:8): “And I heard the voice of the Lord saying, ‘Whom shall I send \emph{(\gk{ἀποστείλω})}, and who will go for us?’ Then I said, ‘Here am I! Send \emph{(\gk{ἀπόστειλόν})} me.’ ” Thus when God’s prophet Ahijah (1 Ki 14:6) is described as “one who is sent,” the conviction is expressed that he is a divinely commissioned representative who must convey a message to the wife of King Jeroboam. By using the word “apostle” in this passage, the translators of the Septuagint gave it a meaning beyond the classical and papyri usages, replacing the secular meaning with a theological one.\parencite[131]{Elwell-Beitzel-1988}} them to preach}
 \bv{15}{And to have power to heal sicknesses, and to cast out devils:}{and to have authority to cast out demons.}
 \bv{16}{And Simon he surnamed Peter;}{To Simon he gave the name Peter;}
 \bv{17}{And James the son of Zebedee, and John the brother of James; and he surnamed them Boanerges, which is, The sons of thunder:}{to James and his brother John, the sons of Zebedee, he gave the name Boanerges (that is, “sons of thunder”);}
 \bv{18}{And Andrew, and Philip, and Bartholomew, and Matthew, and Thomas, and James the son of Alphaeus, and Thaddaeus, and Simon the Canaanite,}{and Andrew, Philip, Bartholomew, Matthew, Thomas, James the son of Alphaeus, Thaddaeus, Simon the Zealot,}
 \bv{19}{And Judas Iscariot, which also betrayed him: and they went into an house.}{and Judas Iscariot, who betrayed him.}
-
-\pericope{Jesus, His Family, and the Scribes (vv.~20--30)}
-
-% ---- SAMPLE FOOTNOTE: copy this pattern for your own notes ----
 \bv{20}{And the multitude cometh together again, so that they could not so much as eat bread.}{Now Jesus went home, and a crowd gathered so that they were not able to eat.}
 \bv{21}{And when his friends heard of it, they went out to lay hold on him: for they said, He is beside himself.}{When his family heard this they went out to restrain him, for they said, “He is out of his mind.”}
+
+\pericope{Blasphemy Against the Holy Spirit (vv.~22--30)}
+
 \bv{22}{And the scribes which came down from Jerusalem said, He hath Beelzebub, and by the prince of the devils casteth he out devils.}{The experts in the law who came down from Jerusalem said, “He is possessed by Beelzebul,” and, “By the ruler of demons he casts out demons!”}
 \bv{23}{And he called them unto him, and said unto them in parables, How can Satan cast out Satan?}{So he called them and spoke to them in parables: “How can Satan cast out Satan?}
 \bv{24}{And if a kingdom be divided against itself, that kingdom cannot stand.}{If a kingdom is divided against itself, that kingdom will not be able to stand.}
@@ -126,25 +160,28 @@
 \bv{29}{But he that shall blaspheme against the Holy Ghost hath never forgiveness, but is in danger of eternal damnation:}{But whoever blasphemes against the Holy Spirit will never be forgiven, but is guilty of an eternal sin”}
 \bv{30}{Because they said, He hath an unclean spirit.}{(because they said, “He has an unclean spirit”).}
 
-\pericope{The True Family of Jesus (vv.~31--35)}
+\end{paracol}
+\footnotelayout{p}   % last section: footnotes sit right under the text
+\section*{Jesus' Mother and Brothers (vv.~31--35)}
+\begin{paracol}{2}
 
 \bv{31}{There came then his brethren and his mother, and, standing without, sent unto him, calling him.}{Then Jesus’ mother and his brothers came. Standing outside, they sent word to him, to summon him.}
 \bv{32}{And the multitude sat about him, and they said unto him, Behold, thy mother and thy brethren without seek for thee.}{A crowd was sitting around him and they said to him, “Look, your mother and your brothers are outside looking for you.”}
 \bv{33}{And he answered them, saying, Who is my mother, or my brethren?}{He answered them and said, “Who are my mother and my brothers?”}
 \bv{34}{And he looked round about on them which sat about him, and said, Behold my mother and my brethren!}{And looking at those who were sitting around him in a circle, he said, “Here are my mother and my brothers!}
-\bv{35}{For whosoever shall do the will of God, the same is my brother, and my sister, and mother.}{For whoever does the will of God is my brother and sister and mother.”\footnote{According to Jesus, the natural family should neither be the focal and decisive point of life nor be rejected as unimportant or irrelevant. Rather, the dynamic tension must be held between the will of God expressed in particular ways through the family of God and care for the natural, believing or unbelieving family, as Jesus did in his own life \parencite[522]{Bayer-2021}}}
+\bv{35}{For whosoever shall do the will of God, the same is my brother, and my sister, and mother\fnref{fn:family}.}{For whoever does the will of God is my brother and sister and mother.”\footnote{\label{fn:family}According to Jesus, the natural family should neither be the focal and decisive point of life nor be rejected as unimportant or irrelevant. Rather, the dynamic tension must be held between the will of God expressed in particular ways through the family of God and care for the natural, believing or unbelieving family, as Jesus did in his own life \parencite[522]{Bayer-2021}}}
 
 \end{paracol}
 
-\begin{figure}[!b]
-\footnotesize
-\begin{center}
+\minorhead{Collect -- Personal Devotion, 88. For Daily Growth -- \emph{Richard of Chichester}\, \\ \parencite[672]{BCP-2019}}
+Thanks be to thee, my Lord Jesus Christ, for all the pains and insults thou hast borne for me, and all the benefits thou hast given me. O most merciful Redeemer, Friend, and Brother: Grant that I may see thee more clearly, love thee more dearly, and follow thee more nearly, day by day. \textbf{Amen}
+
+\minorhead{Works Cited}
+\printbibliography[heading=none]
+
+{\footnotesize\centering
 KJV text is in the public domain.\\
 Scripture quoted by permission. Quotations designated (NET) are from the NET Bible\textsuperscript{\textregistered}
-copyright \textcopyright 1996, 2019 by Biblical Studies Press, L.L.C. \texttt{http://netbible.com}. All rights reserved.
-\end{center}
-\normalsize
-\printbibliography[heading=bibintoc, title={Works Cited}]
-\end{figure}
+copyright \textcopyright 1996, 2019 by Biblical Studies Press, L.L.C. \texttt{http://netbible.com}. All rights reserved.\par}
 
 \end{document}
